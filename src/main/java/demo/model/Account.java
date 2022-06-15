@@ -2,10 +2,17 @@ package demo.model;
 
 public class Account {
 
-
     private Long id;
     private String name;
     private Integer salary;
+    private String email;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -31,9 +38,10 @@ public class Account {
         this.salary = salary;
     }
 
-    public Account(Long id, String name, Integer salary) {
+    public Account(Long id, String name, Integer salary, String email) {
         this.id = id;
         this.name = name;
         this.salary = salary;
+        this.email = email;
     }
 }

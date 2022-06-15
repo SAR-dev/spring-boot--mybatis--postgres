@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/account")
 public class AccountController {
 
-    private AccountMapper accountMapper;
+    private final AccountMapper accountMapper;
 
     public AccountController(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
