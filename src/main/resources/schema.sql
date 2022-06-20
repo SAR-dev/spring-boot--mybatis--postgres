@@ -1,8 +1,9 @@
-drop table if exists account;
-create table account
-(
-    id serial not null primary key,
-    name varchar,
-    salary int,
-    email varchar
-);
+DROP TABLE IF EXISTS account;
+
+CREATE TABLE account
+  (
+     id     SERIAL NOT NULL PRIMARY KEY,
+     name   VARCHAR,
+     salary INT,
+     email  VARCHAR
+  );
