@@ -1,9 +1,9 @@
-package demo.service;
+package demo.jwt;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.controller.UserDTO;
+import demo.jwt.UserDTO;
 import demo.mapper.UsersMapper;
 import demo.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,13 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("javainuse".equals(username)) {
-            return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-                    new ArrayList<>());
-        } else {
+        Users user = usersMapper.getUsers(username);
+        if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
+        return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
-
     public UserDTO save(UserDTO user) {
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
         usersMapper.addUsers(user);
         return user;
     }

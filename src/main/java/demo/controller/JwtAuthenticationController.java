@@ -1,11 +1,10 @@
 package demo.controller;
 
-import java.util.Objects;
-
-import demo.config.JwtTokenUtil;
-import demo.model.JwtRequest;
-import demo.model.JwtResponse;
-import demo.service.JwtUserDetailsService;
+import demo.jwt.JwtUserDetailsService;
+import demo.jwt.JwtRequest;
+import demo.jwt.JwtResponse;
+import demo.jwt.JwtTokenUtil;
+import demo.jwt.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +12,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +24,9 @@ public class JwtAuthenticationController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
@@ -44,12 +47,13 @@ public class JwtAuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        userDetailsService.save(user);
-        return ResponseEntity.ok(userDetailsService.all());
+        user.setPassword(bcryptEncoder.encode(user.getPassword()));
+        return ResponseEntity.ok( userDetailsService.save(user));
     }
 
     private void authenticate(String username, String password) throws Exception {
         try {
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);

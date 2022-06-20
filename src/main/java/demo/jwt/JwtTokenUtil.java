@@ -1,4 +1,4 @@
-package demo.config;
+package demo.jwt;
 
 import java.io.Serializable;
 import java.util.Date;

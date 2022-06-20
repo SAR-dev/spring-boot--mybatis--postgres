@@ -1,4 +1,4 @@
-package demo.config;
+package demo.jwt;
 
 import java.io.IOException;
 import java.io.Serializable;

@@ -1,10 +1,10 @@
 package demo.enums;
 
 public enum Status {
-    PRESENT,
-    START,
-    END,
-    BREAK_START,
-    BREAK_END,
-    ABSENT
+    Present,
+    Absent,
+    Start,
+    End,
+    BreakStart,
+    BreakEnd
 }

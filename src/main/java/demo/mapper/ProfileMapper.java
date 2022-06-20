@@ -15,4 +15,7 @@ public interface ProfileMapper {
 
     @Insert("insert into profile(firstName, lastName, employeeId, gender, department, currentStatus) values(#{firstName}, #{lastName}, #{employeeId}, #{gender}, #{department}, #{currentStatus})")
     void addProfile(Profile profile);
+
+    @Select("select * from profile where id = #{id}")
+    Profile getProfile(Number id);
 }

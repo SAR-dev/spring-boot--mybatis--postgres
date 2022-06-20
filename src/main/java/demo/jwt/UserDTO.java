@@ -1,4 +1,4 @@
-package demo.controller;
+package demo.jwt;
 
 public class UserDTO {
     public UserDTO(String username, String password) {

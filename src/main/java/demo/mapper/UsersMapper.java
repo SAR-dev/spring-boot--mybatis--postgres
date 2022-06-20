@@ -1,7 +1,7 @@
 package demo.mapper;
 
-import demo.controller.UserDTO;
-import demo.model.Account;
+import demo.jwt.UserDTO;
+import demo.model.Profile;
 import demo.model.Users;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -14,4 +14,7 @@ public interface UsersMapper {
 
     @Insert("insert into users(username, password) values(#{username}, #{password})")
     void addUsers(UserDTO userDTO);
+
+    @Select("select * from users where username = #{username}")
+    Users getUsers(String username);
 }
